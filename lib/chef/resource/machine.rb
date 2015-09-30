@@ -102,8 +102,7 @@ class Machine < Chef::Resource::LWRPBase
 puts "DSR: options #{options}"
 puts "DSR: machine options #{@machine_options}"
 
-    Chef::Mixin::DeepMerge.hash_only_merge(@machine_options, options)
-#@machine_options =
+    @machine_options = Chef::Mixin::DeepMerge.hash_only_merge(@machine_options, options)
   end
 
   # This is here because provisioning users will probably want to do things like:
