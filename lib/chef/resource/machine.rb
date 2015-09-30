@@ -97,9 +97,16 @@ class Machine < Chef::Resource::LWRPBase
     end
   end
 
+  # def add_machine_options(options)
+  #   @machine_options = Cheffish::MergedConfig.new(options, @machine_options)
+  # end
   def add_machine_options(options)
-    @machine_options = Cheffish::MergedConfig.new(options, @machine_options)
+    @machine_options = Chef::Mixin::DeepMerge.hash_only_merge(options, @machine_options)
   end
+
+    # def add_machine_options(options, &block)
+    #   with_machine_options(Chef::Mixin::DeepMerge.hash_only_merge(current_machine_options, options), &block)
+    # end
 
 
   # This is here because provisioning users will probably want to do things like:
